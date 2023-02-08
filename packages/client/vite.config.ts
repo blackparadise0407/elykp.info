@@ -8,6 +8,9 @@ const config: UserConfig = {
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],
 	},
+	server: {
+		open: true,
+	},
 	resolve: {
 		alias: {
 			'~': path.resolve(__dirname, 'src'),
