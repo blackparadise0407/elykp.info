@@ -10,6 +10,9 @@
 		"sourceMap": true,
 		"strict": true,
 		"strictNullChecks": true,
-		"noImplicitAny": false
+		"noImplicitAny": false,
+		"paths": {
+			"~/*": ["./src/*"]
+		}
 	}
 }
