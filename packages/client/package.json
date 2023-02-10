@@ -29,5 +29,10 @@
 		"vite": "^4.0.0",
 		"vitest": "^0.25.3"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"clsx": "^1.2.1",
+		"query-string": "^8.1.0",
+		"rxjs": "^7.8.0"
+	}
 }
