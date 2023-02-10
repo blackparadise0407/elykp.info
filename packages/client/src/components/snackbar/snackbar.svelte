@@ -2,16 +2,16 @@
 	import clsx from 'clsx';
 	import { onDestroy, onMount } from 'svelte';
 
-	import type { Snackbar } from '~/lib/data-access/snackbar';
+	import { dequeue, type Snackbar } from '~/lib/data-access/snackbar';
 
 	let timeout: NodeJS.Timeout | undefined;
 
 	export let data: Snackbar;
 
 	onMount(() => {
-		// timeout = setTimeout(() => {
-		// 	dequeue(data.id);
-		// }, 5000);
+		timeout = setTimeout(() => {
+			dequeue(data.id);
+		}, 5000);
 	});
 
 	onDestroy(() => {
