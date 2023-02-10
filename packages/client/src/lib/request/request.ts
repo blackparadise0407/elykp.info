@@ -33,7 +33,6 @@ export const request = <TData>(method: Method, url: string, data?: unknown) => {
 			return throwError(() => new Error('Something went wrong'));
 		}),
 		catchError((error) => {
-			console.error('catchError', error.message);
 			enqueue(error.message);
 			return of(null);
 		}),

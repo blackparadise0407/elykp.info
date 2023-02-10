@@ -4,5 +4,5 @@
 	import SnackbarProvider from '~/components/snackbar/snackbar-provider.svelte';
 </script>
 
-<!-- <SnackbarProvider /> -->
+<SnackbarProvider />
 <slot />
