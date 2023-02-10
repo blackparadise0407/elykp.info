@@ -6,6 +6,9 @@ module.exports = {
 		ecmaVersion: 2020,
 		tsconfigRootDir: __dirname,
 	},
+	globals: {
+		NodeJS: true,
+	},
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 	settings: {
 		'svelte3/typescript': () => require('typescript'),
