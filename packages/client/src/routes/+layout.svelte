@@ -3,7 +3,7 @@
 	import '~/app.css';
 
 	import SnackbarProvider from '~/components/snackbar/snackbar-provider.svelte';
-	import { authStore$, getUser, initOidc } from '~/lib/data-access/oidc';
+	import { initOidc } from '~/lib/data-access/oidc';
 
 	onMount(() => {
 		initOidc();

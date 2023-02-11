@@ -42,7 +42,7 @@
 		"prettier-plugin-svelte": "^2.9.0"
 	},
 	"lint-staged": {
-		"*.ts": [
+		"*.{ts,svelte}": [
 			"eslint",
 			"git add"
 		]
