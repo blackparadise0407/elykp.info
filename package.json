@@ -17,11 +17,12 @@
 	},
 	"scripts": {
 		"prepare": "husky install",
+		"identity:dev": "docker-compose -f ./packages/identity/docker-compose.yml up -d --build",
 		"client:dev": "yarn workspace client dev",
 		"client:test": "yarn workspace client test",
 		"api:dev": "yarn workspace api start:dev",
 		"api:test": "yarn workspace api test",
-		"start:dev": "concurrently --kill-others-on-fail \"yarn:client:dev\" \"yarn:api:dev\"",
+		"start:dev": "concurrently --kill-others-on-fail \"yarn:identity:dev\" \"yarn:client:dev\" \"yarn:api:dev\"",
 		"test": "concurrently --kill-others-on-fail \"yarn:client:test\" \"yarn:api:test\"",
 		"lint": "prettier --write \"packages/**/src/*.{ts,svelte,html}\" && eslint ."
 	},
