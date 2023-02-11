@@ -1,5 +1,6 @@
 .DS_Store
 .vscode
+.husky
 **/node_modules
 **/build
 **/dist
@@ -7,10 +8,8 @@
 **/.svn
 **/.hg
 packages/client/.svelte-kit
-/package
-.env
-.env.*
-!.env.example
+**/.env
+**/.env.*
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
