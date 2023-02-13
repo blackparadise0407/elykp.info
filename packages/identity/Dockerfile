@@ -11,6 +11,7 @@ RUN /opt/keycloak/bin/kc.sh build
 
 FROM quay.io/keycloak/keycloak:20.0.1
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
+COPY kc.data /home
 
 ENV KC_DB=postgres
 ENV KC_DB_URL=jdbc:postgresql://host.docker.internal:5432/elykp_com_dev
