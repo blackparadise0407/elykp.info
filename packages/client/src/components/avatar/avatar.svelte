@@ -14,7 +14,7 @@
 </script>
 
 <div class={clsx('relative rounded-full aspect-square overflow-hidden', size)}>
-	<img src={url} alt={user.name} />
+	<img src={url} alt={user.name} referrerpolicy="no-referrer" />
 </div>
 
 <style lang="postcss">

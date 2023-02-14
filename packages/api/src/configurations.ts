@@ -1,6 +1,7 @@
 export default () => ({
 	oidc: {
 		authority: process.env.OIDC_AUTHORITY || 'http://localhost:8080/realms/elykp',
+		audience: process.env.OIDC_AUDIENCE || 'http://localhost:8081',
 	},
 	port: parseInt(process.env.PORT!, 10) || 8081,
 	database: {

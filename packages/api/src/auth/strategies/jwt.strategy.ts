@@ -16,6 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 				jwksRequestsPerMinute: 5,
 				cache: true,
 			}),
+			audience: config.get('oidc.audience'),
 			issuer: config.get('oidc.authority'),
 		});
 	}
