@@ -7,7 +7,7 @@
 
 <nav class="shadow">
 	<div class="h-[68px] container flex items-center">
-		<img class="w-24 lg:w-32" src="/logo.png" alt="Elykp logo" />
+		<a href="/"><img class="w-24 lg:w-32" src="/logo.png" alt="Elykp logo" /></a>
 		<div class="flex-grow" />
 
 		{#if $isAuth$}
@@ -17,8 +17,12 @@
 					<Dropdown>
 						<div slot="overlay" class="pt-2 bg-white shadow rounded-lg">
 							<div class="px-4 pb-2">
-								<p class="font-medium text-gray-900">{$user$.name}</p>
-								<p class="text-sm text-gray-400">{$user$.email}</p>
+								<p class="font-medium text-gray-900">{$user$.email}</p>
+								<a
+									href={`/${$user$.preferred_username}`}
+									class="text-sm text-gray-400 hover:underline underline-offset-2"
+									>@{$user$.preferred_username}</a
+								>
 							</div>
 							<hr />
 							<div class="px-4 py-2" />
