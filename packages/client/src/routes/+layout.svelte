@@ -1,14 +1,26 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	// top import to load tailwindcss
 	import '~/app.css';
 
+	import { onMount } from 'svelte';
+
+	import Header from '~/components/layouts/header.svelte';
 	import SnackbarProvider from '~/components/snackbar/snackbar-provider.svelte';
-	import { initOidc } from '~/lib/data-access/oidc';
+	import { getUser, initOidc, isLoading$ } from '~/lib/data-access/oidc';
 
 	onMount(() => {
 		initOidc();
+		getUser();
 	});
 </script>
 
 <SnackbarProvider />
-<slot />
+
+{#if $isLoading$}
+	Loading...
+{:else}
+	<Header />
+	<div class="container">
+		<slot />
+	</div>
+{/if}

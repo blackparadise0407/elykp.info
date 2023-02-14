@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
+		<link rel="icon" href="/favicon.png" />
 		<title>Waiting...</title>
 	</head>
 	<body>
@@ -14,16 +15,15 @@
 		<script>
 			var mgr = new Oidc.UserManager({
 				response_mode: 'query',
-				userStore: new Oidc.WebStorageStateStore(),
+				userStore: new Oidc.WebStorageStateStore({
+					store: window.sessionStorage,
+				}),
 			})
 				.signinRedirectCallback()
 				.then(function (user) {
-					console.log('signin response success', user);
-					// window.location.href = '../';
+					window.location.href = user.state || '/';
 				})
-				.catch(function (err) {
-					console.log(err);
-				});
+				.catch();
 		</script>
 	</body>
 </html>
