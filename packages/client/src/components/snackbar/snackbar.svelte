@@ -29,12 +29,12 @@
 	in:fly={{ y: 100, opacity: 0, duration: 500 }}
 	out:fly={{ opacity: 0, duration: 300 }}
 	class={clsx(
-		'relative mx-auto max-w-md w-fit min-w-[200px] pl-4 pr-8 py-2 rounded bg-white shadow',
+		'relative mx-auto max-w-md w-fit min-w-[200px] pl-4 pr-10 py-2 text-sm md:text-base rounded bg-white shadow',
 		data.variant,
 	)}
 >
 	{data.message}
-	<button class="absolute top-1/2 right-2 -translate-y-1/2" on:click={handleDequeue}>
+	<button class="absolute top-1/2 right-4 -translate-y-1/2" on:click={handleDequeue}>
 		<i class="bi bi-x-circle" />
 	</button>
 </div>

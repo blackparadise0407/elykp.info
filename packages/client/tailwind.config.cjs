@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/components/**/*.svelte', './src/routes/*.svelte'],
+  content: ['./src/components/**/*.svelte', './src/routes/**/*.svelte'],
   theme: {
+    fontFamily: {
+      "body": ["Inter"],
+      "display": ["Poppins",]
+    },
     extend: {},
     container: {
       center: true,

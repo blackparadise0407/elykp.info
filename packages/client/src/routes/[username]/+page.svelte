@@ -6,6 +6,4 @@
 	$: user$ = data.user$;
 </script>
 
-<div>
-	{JSON.stringify($user$)}
-</div>
+<div />

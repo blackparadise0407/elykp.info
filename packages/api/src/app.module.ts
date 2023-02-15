@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import configurations from './configurations';
+import { KC_CONNECTION } from './shared/constants';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -15,6 +16,7 @@ import { UsersModule } from './users/users.module';
 			isGlobal: true,
 		}),
 		TypeOrmModule.forRootAsync({
+			name: KC_CONNECTION,
 			imports: [ConfigModule],
 			useFactory: (config: ConfigService) => ({
 				type: 'postgres',

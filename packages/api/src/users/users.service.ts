@@ -3,6 +3,8 @@ import { InjectDataSource } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { DataSource } from 'typeorm';
 
+import { KC_CONNECTION } from '~/shared/constants';
+
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
@@ -19,7 +21,7 @@ const critBuilder = (obj = {}) => {
 
 @Injectable()
 export class UsersService {
-	constructor(@InjectDataSource() private readonly dataSource: DataSource) {}
+	constructor(@InjectDataSource(KC_CONNECTION) private readonly dataSource: DataSource) {}
 
 	findAll(): Promise<User[]> {
 		return this.dataSource.manager

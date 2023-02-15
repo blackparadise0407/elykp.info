@@ -2,7 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	@apply font-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply font-display font-medium;
+}
+
 i[class^='bi-']::before,
 i[class*=' bi-']::before {
-	line-height: 1.2 !important;
+	line-height: 1.1 !important;
 }

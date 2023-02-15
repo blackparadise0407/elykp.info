@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { user$, isAuth$, signIn, logout } from '~/lib/data-access/oidc';
+	import { user$, isAuth$, signIn } from '~/lib/data-access/oidc';
 
+	import DropdownItem from './dropdown-item.svelte';
 	import Avatar from '../avatar/avatar.svelte';
+	import Button from '../button/button.svelte';
 	import Dropdown from '../dropdown/dropdown.svelte';
 </script>
 
@@ -13,31 +15,32 @@
 		{#if $isAuth$}
 			{#if $user$}
 				<div class="flex items-center gap-2">
-					<p>{$user$.name}</p>
+					<p class="font-display font-medium">{$user$.name}</p>
 					<Dropdown>
-						<div slot="overlay" class="pt-2 bg-white shadow rounded-lg">
+						<div slot="overlay" class="w-52 pt-2 bg-white shadow rounded-lg">
 							<div class="px-4 pb-2">
-								<p class="font-medium text-gray-900">{$user$.email}</p>
+								<p class="font-medium text-gray-900 truncate">{$user$.name}</p>
 								<a
 									href={`/${$user$.preferred_username}`}
-									class="text-sm text-gray-400 hover:underline underline-offset-2"
+									class="text-sm font-medium text-gray-400 truncate hover:text-gray-600 transition-colors"
 									>@{$user$.preferred_username}</a
 								>
 							</div>
 							<hr />
-							<div class="px-4 py-2" />
+							<div class="px-2 py-2">
+								<DropdownItem>
+									<i slot="icon" class="bi bi-gear" />
+									settings
+								</DropdownItem>
+							</div>
 							<hr />
-							<ul>
-								<li class="px-4 py-1.5 hover:bg-gray-100 transition-colors">logout</li>
-								<li
-									class="flex items-center gap-2 px-4 py-1.5 hover:bg-gray-100 transition-colors"
-									on:click={logout}
-									on:keypress={undefined}
-								>
-									<i class="bi bi-box-arrow-right" />
-									logout
-								</li>
-							</ul>
+
+							<div class="px-2 py-2">
+								<Button block align="center">
+									<i slot="icon" class="bi bi-box-arrow-right" />
+									log_out
+								</Button>
+							</div>
 						</div>
 						<Avatar user={$user$} />
 					</Dropdown>
