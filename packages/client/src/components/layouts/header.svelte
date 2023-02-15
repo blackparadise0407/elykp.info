@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { user$, isAuth$, signIn } from '~/lib/data-access/oidc';
+	import { user$, isAuth$, signIn, logout } from '~/lib/data-access/oidc';
+	import { t } from '~/lib/i18n';
 
 	import DropdownItem from './dropdown-item.svelte';
 	import Avatar from '../avatar/avatar.svelte';
@@ -15,30 +16,30 @@
 		{#if $isAuth$}
 			{#if $user$}
 				<div class="flex items-center gap-2">
-					<p class="font-display font-medium">{$user$.name}</p>
+					<p class="text-sm lg:text-base font-display font-medium">{$user$.name}</p>
 					<Dropdown>
-						<div slot="overlay" class="w-52 pt-2 bg-white shadow rounded-lg">
+						<div slot="overlay" class="w-[250px] pt-2 bg-white shadow rounded-lg">
 							<div class="px-4 pb-2">
 								<p class="font-medium text-gray-900 truncate">{$user$.name}</p>
 								<a
 									href={`/${$user$.preferred_username}`}
-									class="text-sm font-medium text-gray-400 truncate hover:text-gray-600 transition-colors"
-									>@{$user$.preferred_username}</a
+									class="block text-sm font-medium text-gray-400 truncate hover:text-gray-600 transition-colors"
+									>{$user$.preferred_username}</a
 								>
 							</div>
 							<hr />
 							<div class="px-2 py-2">
 								<DropdownItem>
 									<i slot="icon" class="bi bi-gear" />
-									settings
+									{$t('settings')}
 								</DropdownItem>
 							</div>
 							<hr />
 
 							<div class="px-2 py-2">
-								<Button block align="center">
+								<Button block align="center" on:click={logout}>
 									<i slot="icon" class="bi bi-box-arrow-right" />
-									log_out
+									{$t('log_out')}
 								</Button>
 							</div>
 						</div>

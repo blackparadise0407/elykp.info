@@ -1,5 +1,6 @@
 <script lang="ts">
 	import clsx from 'clsx';
+	import { createEventDispatcher } from 'svelte';
 
 	import Spinner from '../spinner/spinner.svelte';
 
@@ -12,6 +13,12 @@
 	export let loading = false;
 	export let disabled = false;
 	export let align: ButtonAlign = 'left';
+
+	const dispatch = createEventDispatcher();
+
+	function handleClick() {
+		dispatch('click');
+	}
 </script>
 
 <button
@@ -23,6 +30,7 @@
 		disabled && 'pointer-events-none disabled',
 		variant,
 	)}
+	on:click={handleClick}
 	{disabled}
 >
 	{#if loading}
