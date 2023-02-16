@@ -1,9 +1,8 @@
 import qs, { type StringifyOptions } from 'query-string';
-import { catchError, of, switchMap, throwError } from 'rxjs';
+import { switchMap, throwError } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 
 import { selectAccessToken$ } from '../data-access/oidc';
-import { enqueue } from '../data-access/snackbar';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
@@ -44,10 +43,6 @@ export const request = <TData>(method: Method, url: string, data?: unknown) => {
 						return response.json() as Promise<TData>;
 					}
 					return throwError(() => new Error('Something went wrong'));
-				}),
-				catchError((error) => {
-					enqueue(error.message);
-					return of(null);
 				}),
 			);
 		}),

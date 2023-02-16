@@ -22,7 +22,9 @@
 	Loading...
 {:else}
 	<Header />
-	<div class="container">
-		<slot />
-	</div>
+	<main class="bg-slate-50 min-h-[calc(100vh-68px)]">
+		<div class="container">
+			<slot />
+		</div>
+	</main>
 {/if}

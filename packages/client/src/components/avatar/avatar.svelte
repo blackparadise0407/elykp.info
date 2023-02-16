@@ -1,20 +1,22 @@
 <script lang="ts">
 	import clsx from 'clsx';
+	import type { IUser } from 'common';
 	import type { Profile } from 'oidc-client';
 
 	import { createMd5Hash } from '~/utils/crypto';
 
 	type AvatarSize = 'normal' | 'small' | 'large';
 
-	export let user: Profile;
+	export let user: Profile | IUser;
 	export let size: AvatarSize = 'normal';
+	export let cls = '';
+	export let src = '';
 
-	$: url =
-		user.picture ?? `https://www.gravatar.com/avatar/${createMd5Hash(user.email)}?d=identicon`;
+	$: url = src || `https://www.gravatar.com/avatar/${createMd5Hash(user.email)}?d=mp`;
 </script>
 
-<div class={clsx('relative rounded-full aspect-square overflow-hidden', size)}>
-	<img src={url} alt={user.name} referrerpolicy="no-referrer" />
+<div class={clsx('relative rounded-full aspect-square overflow-hidden', size, cls)}>
+	<img class="w-full" src={url} alt="" referrerpolicy="no-referrer" />
 </div>
 
 <style lang="postcss">
