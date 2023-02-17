@@ -1,18 +1,13 @@
 <script lang="ts">
 	import clsx from 'clsx';
-	import type { IUser } from 'common';
-	import type { Profile } from 'oidc-client';
-
-	import { createMd5Hash } from '~/utils/crypto';
 
 	type AvatarSize = 'normal' | 'small' | 'large';
 
-	export let user: Profile | IUser;
 	export let size: AvatarSize = 'normal';
 	export let cls = '';
 	export let src = '';
 
-	$: url = src || `https://www.gravatar.com/avatar/${createMd5Hash(user.email)}?d=mp`;
+	$: url = src || `/avatar-placeholder.webp`;
 </script>
 
 <div class={clsx('relative rounded-full aspect-square overflow-hidden', size, cls)}>
