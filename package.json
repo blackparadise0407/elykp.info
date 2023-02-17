@@ -17,7 +17,7 @@
 	},
 	"scripts": {
 		"prepare": "husky install",
-		"identity:dev": "docker-compose -f ./packages/identity/docker-compose.yml up",
+		"identity:dev": "packages/identity/bin/kc.bat start-dev",
 		"client:dev": "yarn workspace client dev",
 		"client:test": "yarn workspace client test",
 		"api:dev": "yarn workspace api start:dev",
