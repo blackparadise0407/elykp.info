@@ -8,3 +8,10 @@ export interface IUser {
 	username: string;
 	created_timestamp: number;
 }
+
+export interface IProfile {
+	dob: string;
+	phoneNumber: string;
+	country: string;
+	jobTitle: string;
+}
