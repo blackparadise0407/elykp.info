@@ -20,18 +20,32 @@ const settings = (webOrigin: string): UserManagerSettings => ({
 	authority: 'http://localhost:8080/realms/elykp',
 	client_id: 'elykp-mm-client',
 	redirect_uri: webOrigin + '/signin-callback.html',
-	automaticSilentRenew: true,
-	silent_redirect_uri: webOrigin + '/silent-renew.html',
 	response_type: 'code',
-	scope: 'openid profile',
+	scope: 'openid profile elykp-resources-api',
 	post_logout_redirect_uri: webOrigin,
+	silent_redirect_uri: webOrigin + '/silent-renew.html',
+	automaticSilentRenew: true,
+	validateSubOnSilentRenew: true,
+	loadUserInfo: false,
 });
 
-let mgr: UserManager;
+let manager: UserManager;
 
 export const initOidc = () => {
 	const WEB_ORIGIN = window.location.origin;
-	mgr = new UserManager(settings(WEB_ORIGIN));
+	manager = new UserManager(settings(WEB_ORIGIN));
+
+	manager.events.addUserLoaded(() => {
+		manager.getUser().then((user) => {
+			if (user) {
+				setUser(user);
+			}
+		});
+	});
+
+	manager.events.addSilentRenewError(() => {
+		logout();
+	});
 };
 
 export const authStore$ = writable<AuthStore>({
@@ -39,14 +53,53 @@ export const authStore$ = writable<AuthStore>({
 	isLoading: true,
 });
 
-export const getUser = () => {
-	return mgr
-		.getUser()
+const setUser = (user: User) => {
+	authStore$.update((state) => ({
+		...state,
+		isLoading: false,
+		user,
+	}));
+};
+
+const getUser = () => {
+	return manager.getUser();
+};
+
+// const startAuthentication = async () => {
+// 	if (window.location.hash && window.location.hash.indexOf('id_token') >= 0) {
+// 		try {
+// 			const user = await mgr.signinRedirectCallback();
+// 			setUser(user);
+// 		} catch (e) {
+// 			window.location.href = '/';
+// 		}
+// 	} else {
+// 		const user = await mgr.getUser();
+// 		if (!user || user.expired) {
+// 			mgr.signinRedirect();
+// 		} else {
+// 			setUser(user);
+// 			window.location.href = '/';
+// 		}
+// 	}
+// };
+
+export const signIn = () => manager.signinRedirect();
+
+export const logout = () => manager.signoutRedirect();
+
+export const startAuthentication = async () => {
+	getUser()
 		.then((user) => {
-			authStore$.update((state) => ({
-				...state,
-				user,
-			}));
+			if (user) {
+				if (user.expired) {
+					signIn();
+				} else {
+					setUser(user);
+				}
+			} else {
+				manager.signinSilent({}).catch(() => {});
+			}
 		})
 		.catch()
 		.finally(() => {
@@ -57,14 +110,6 @@ export const getUser = () => {
 		});
 };
 
-export const signIn = () => {
-	mgr.signinRedirect();
-};
-
-export const logout = () => {
-	mgr.signoutRedirect();
-};
-
 const parseToken = (user?: User | null) => {
 	if (user) {
 		return `${user.token_type} ${user.access_token}`;
@@ -73,7 +118,7 @@ const parseToken = (user?: User | null) => {
 };
 
 export const getAccessToken = () => {
-	return mgr
+	return manager
 		.getUser()
 		.then((user) => parseToken(user))
 		.catch(() => null);

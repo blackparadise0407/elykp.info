@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { enqueue } from '~/lib/data-access/snackbar';
+	import PhotoCard from '~/components/photo-card/photo-card.svelte';
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<button on:click={() => enqueue('Welcome to SvelteKit')}>Enqueue</button>
+<div class="flex justify-between">
+	<div class="py-6 mx-4">Sidebar</div>
+	<div class="w-full max-w-5xl py-6 mx-4">
+		<PhotoCard />
+	</div>
+</div>

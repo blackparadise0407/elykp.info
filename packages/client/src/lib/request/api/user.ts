@@ -1,7 +1,20 @@
-import type { IUser } from 'common';
+import type { IKeycloakUser } from 'common';
 
 import { request } from '../request';
 
-const ENDPOINT = '/users/';
+const ENDPOINT = 'http://localhost:8080/admin/realms/elykp';
 
-export const getByUsername = (username: string) => request<IUser>('GET', ENDPOINT + username);
+type GetByParams = {
+	email?: string;
+	username?: string;
+	lastName?: string;
+	firstName?: string;
+	search?: string;
+	max?: number;
+};
+
+export const getBy = (params: GetByParams, exact = true) =>
+	request<IKeycloakUser[]>('GET', ENDPOINT + '/users', { max: 1, ...params, exact });
+
+export const getById = (userId: string) =>
+	request<IKeycloakUser>('GET', ENDPOINT + '/users/' + userId);

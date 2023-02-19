@@ -15,3 +15,16 @@ export interface IProfile {
 	country: string;
 	jobTitle: string;
 }
+
+export interface IKeycloakUser {
+	id: string;
+	username: string;
+	enabled: boolean;
+	totp: boolean;
+	emailVerified: boolean;
+	firstName: string;
+	lastName: string;
+	email: string;
+	attributes: Record<string, string[]>;
+	[key: string]: any;
+}

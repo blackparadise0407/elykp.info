@@ -13,7 +13,11 @@
 			referrerpolicy="no-referrer"
 		></script>
 		<script>
-			var mgr = new Oidc.UserManager().signinSilentCallback();
+			var mgr = new Oidc.UserManager({
+				userStore: new Oidc.WebStorageStateStore({
+					store: window.sessionStorage,
+				}),
+			}).signinSilentCallback();
 		</script>
 	</body>
 </html>

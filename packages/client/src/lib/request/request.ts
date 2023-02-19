@@ -6,7 +6,9 @@ import { selectAccessToken$ } from '../data-access/oidc';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://localhost:8081';
+
+const ERROR_MSG = 'Something went wrong';
 
 const stringifyOptions: StringifyOptions = {
 	arrayFormat: 'comma',
@@ -22,11 +24,12 @@ export const request = <TData>(method: Method, url: string, data?: unknown) => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
+		mode: 'cors',
 	};
 
 	if (data) {
 		if (method === 'GET' && data) {
-			_url = url + qs.stringify(data, stringifyOptions);
+			_url = url + '?' + qs.stringify(data, stringifyOptions);
 		} else {
 			requestInit.body = JSON.stringify(data);
 		}
@@ -42,7 +45,7 @@ export const request = <TData>(method: Method, url: string, data?: unknown) => {
 					if (response.ok) {
 						return response.json() as Promise<TData>;
 					}
-					return throwError(() => new Error('Something went wrong'));
+					return throwError(() => new Error(ERROR_MSG));
 				}),
 			);
 		}),

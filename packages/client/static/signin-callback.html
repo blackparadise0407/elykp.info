@@ -14,10 +14,10 @@
 		></script>
 		<script>
 			var mgr = new Oidc.UserManager({
-				response_mode: 'query',
 				userStore: new Oidc.WebStorageStateStore({
 					store: window.sessionStorage,
 				}),
+				response_mode: 'query',
 			})
 				.signinRedirectCallback()
 				.then(function (user) {

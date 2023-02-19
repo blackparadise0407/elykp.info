@@ -12,7 +12,7 @@ const locale = writable<SupportedLocale>('en');
 
 function translate(locale: SupportedLocale, key: string, vars: TransVar): string {
 	let text = translations[locale][key];
-	if (!text) return '';
+	if (!text) return key;
 	Object.keys(vars).map((k) => {
 		const regex = new RegExp(`{{${k}}}`, 'g');
 		text = text.replace(regex, vars[k]);
@@ -34,7 +34,7 @@ export const setLanguage = (lang: SupportedLocale) => {
 	}
 };
 
-export const init = () => {
+export const initI18N = () => {
 	if ('localStorage' in window) {
 		setLanguage((window.localStorage.getItem(LOCALE_STORAGE_KEY) || 'en') as SupportedLocale);
 	}

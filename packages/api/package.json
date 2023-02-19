@@ -17,7 +17,10 @@
 		"test:watch": "jest --watch",
 		"test:cov": "jest --coverage",
 		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-		"test:e2e": "jest --config ./test/jest-e2e.json"
+		"test:e2e": "jest --config ./test/jest-e2e.json",
+		"typeorm": "yarn build && npx typeorm -d dist/database/ormconfig.js",
+		"migration:create": "cd src/migrations && typeorm migration:create",
+		"migration:run": "yarn run typeorm migration:run"
 	},
 	"dependencies": {
 		"@nestjs/common": "^8.0.0",
@@ -49,6 +52,8 @@
 		"@types/passport-jwt": "^3.0.8",
 		"@types/supertest": "^2.0.11",
 		"common": "./packages/common",
+		"cross-var": "^1.1.0",
+		"dotenv": "^16.0.3",
 		"jest": "^27.2.5",
 		"source-map-support": "^0.5.20",
 		"supertest": "^6.1.3",

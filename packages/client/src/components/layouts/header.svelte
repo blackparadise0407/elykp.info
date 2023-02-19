@@ -8,8 +8,10 @@
 	import Dropdown from '../dropdown/dropdown.svelte';
 </script>
 
-<nav class="shadow">
-	<div class="h-[68px] container flex items-center">
+<nav
+	class="h-[68px] bg:white dark:bg-neutral-900 shadow border-b border-b-transparent dark:border-b-neutral-800"
+>
+	<div class="h-full container flex items-center">
 		<a href="/"><img class="w-24 lg:w-32" src="/logo.png" alt="Elykp logo" /></a>
 		<div class="flex-grow" />
 
@@ -18,7 +20,10 @@
 				<div class="flex items-center gap-2">
 					<p class="text-sm lg:text-base font-display font-medium">{$user$.name}</p>
 					<Dropdown>
-						<div slot="overlay" class="w-[250px] pt-2 bg-white shadow rounded-lg">
+						<div
+							slot="overlay"
+							class="w-[250px] pt-2 bg-white dark:bg-neutral-800 shadow rounded-lg"
+						>
 							<div class="px-4 pb-2">
 								<p class="font-medium text-gray-900 truncate">{$user$.name}</p>
 								<a
@@ -43,7 +48,7 @@
 								</Button>
 							</div>
 						</div>
-						<Avatar user={$user$} />
+						<Avatar src={$user$.picture} />
 					</Dropdown>
 				</div>
 			{/if}

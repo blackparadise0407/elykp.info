@@ -6,13 +6,11 @@
 
 	import Header from '~/components/layouts/header.svelte';
 	import SnackbarProvider from '~/components/snackbar/snackbar-provider.svelte';
-	import { getUser, initOidc, isLoading$ } from '~/lib/data-access/oidc';
-	import { init } from '~/lib/i18n';
+	import { isLoading$ } from '~/lib/data-access/oidc';
+	import { initialize } from '~/utils/app-init';
 
 	onMount(() => {
-		initOidc();
-		init();
-		getUser();
+		initialize();
 	});
 </script>
 
@@ -22,7 +20,7 @@
 	Loading...
 {:else}
 	<Header />
-	<main class="bg-slate-50 min-h-[calc(100vh-68px)]">
+	<main class="min-h-[calc(100vh-68px)] bg-slate-50 dark:bg-neutral-900">
 		<div class="container">
 			<slot />
 		</div>

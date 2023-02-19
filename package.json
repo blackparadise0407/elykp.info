@@ -20,7 +20,7 @@
 		"identity:dev": "packages/identity/bin/kc.bat start-dev",
 		"client:dev": "yarn workspace client dev",
 		"client:test": "yarn workspace client test",
-		"api:dev": "yarn workspace api start:dev",
+		"api:dev": "cd packages/aurora && mvnw.cmd spring-boot:run",
 		"api:test": "yarn workspace api test",
 		"start:dev": "concurrently --kill-others-on-fail \"yarn:identity:dev\" \"yarn:client:dev\" \"yarn:api:dev\"",
 		"test": "concurrently --kill-others-on-fail \"yarn:client:test\" \"yarn:api:test\"",

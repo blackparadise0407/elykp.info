@@ -52,7 +52,7 @@
 	}
 
 	.default {
-		@apply text-black border-gray-200 hover:border-blue-500 hover:text-blue-500;
+		@apply text-black dark:text-white border-gray-200 dark:border-white hover:border-blue-500 hover:text-blue-500;
 	}
 
 	.danger {
@@ -64,15 +64,15 @@
 	}
 
 	.text {
-		@apply hover:bg-gray-100;
+		@apply hover:bg-gray-100 dark:hover:bg-neutral-800;
 	}
 
 	.disabled {
-		@apply disabled:bg-gray-100 disabled:text-gray-400;
+		@apply disabled:bg-gray-100 dark:disabled:bg-neutral-600 disabled:text-gray-400 dark:disabled:text-neutral-400;
 	}
 
 	.disabled.outline {
-		@apply disabled:bg-gray-100 disabled:border-gray-300 disabled:text-gray-400;
+		@apply disabled:bg-gray-100 dark:disabled:bg-neutral-600 disabled:border-gray-300  dark:disabled:border-neutral-500 disabled:text-gray-400 dark:disabled:text-neutral-400;
 	}
 
 	.align--left {

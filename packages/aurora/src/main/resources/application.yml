@@ -1,0 +1,31 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH_ISSUER_URI:http://localhost:8080/realms/elykp}
+          jwk-set-uri: ${OAUTH_JWKS_URI:http://localhost:8080/realms/elykp/protocol/openid-connect/certs}
+  datasource:
+    url: ${ELYKP_CONNECTION_URL:jdbc:postgresql://localhost:5432/elykp_dev}
+    username: postgres
+    password: 040799
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        '[format_sql]': true
+        jdbc:
+          '[time_zone]': UTC
+
+web:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
