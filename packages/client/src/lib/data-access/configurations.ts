@@ -28,16 +28,17 @@ export const setTheme = (theme: SupportedTheme) => {
 export const initConfiguration = () => {
 	if (
 		localStorage[THEME_STORAGE_KEY] === 'dark' ||
-		(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+		(!(THEME_STORAGE_KEY in localStorage) &&
+			window.matchMedia('(prefers-color-scheme: dark)').matches)
 	) {
 		document.documentElement.classList.add('dark');
 	} else {
 		document.documentElement.classList.remove('dark');
 	}
 
-	localStorage[THEME_STORAGE_KEY] = 'light';
+	// localStorage[THEME_STORAGE_KEY] = 'light';
 
-	localStorage[THEME_STORAGE_KEY] = 'dark';
+	// localStorage[THEME_STORAGE_KEY] = 'dark';
 
-	localStorage.removeItem(THEME_STORAGE_KEY);
+	// localStorage.removeItem(THEME_STORAGE_KEY);
 };

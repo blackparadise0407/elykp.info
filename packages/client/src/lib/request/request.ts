@@ -8,8 +8,6 @@ export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 const BASE_URL = 'http://localhost:8081';
 
-const ERROR_MSG = 'Something went wrong';
-
 const stringifyOptions: StringifyOptions = {
 	arrayFormat: 'comma',
 	skipNull: true,
@@ -45,7 +43,7 @@ export const request = <TData>(method: Method, url: string, data?: unknown) => {
 					if (response.ok) {
 						return response.json() as Promise<TData>;
 					}
-					return throwError(() => new Error(ERROR_MSG));
+					return throwError(() => new Error(response.statusText));
 				}),
 			);
 		}),

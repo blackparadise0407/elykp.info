@@ -29,7 +29,7 @@
 	in:fly={{ y: 100, opacity: 0, duration: 500 }}
 	out:fly={{ x: 100, opacity: 0, duration: 300 }}
 	class={clsx(
-		'relative mx-auto max-w-md w-fit min-w-[200px] pl-4 pr-10 py-2 text-sm md:text-base rounded bg-white shadow',
+		'relative mx-auto max-w-md w-fit min-w-[240px] pl-4 pr-10 py-2 text-sm md:text-base rounded bg-white dark:bg-neutral-800 shadow',
 		data.variant,
 	)}
 >
