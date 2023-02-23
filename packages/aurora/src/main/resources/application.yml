@@ -4,6 +4,13 @@ server:
   port: 8081
 
 spring:
+  data:
+    redis:
+      database: 0
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      # password: ${REDIS_PASSWORD:040799Khoa}
+      timeout: ${REDIS_TIMEOUT:60000}
   security:
     oauth2:
       resourceserver:
@@ -29,3 +36,4 @@ spring:
 web:
   cors:
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
+  scope: ${SCOPE:SCOPE_elykp-resources-api}

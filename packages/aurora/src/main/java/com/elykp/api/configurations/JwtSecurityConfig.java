@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -16,18 +17,27 @@ public class JwtSecurityConfig {
     @Value("${web.cors.allowed-origins}")
     private String allowedOrigins;
 
+    @Value("${web.scope}")
+    private String scope;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/**")
-                .hasAuthority("SCOPE_elykp-resources-api")
-                .anyRequest()
-                .authenticated().and()
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt());
+        http
+                .cors().and()
+                .csrf().disable()
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/users").permitAll()
+                        .requestMatchers("/api/**").hasAuthority(scope)
+                        .anyRequest().authenticated())
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
         return http.build();
     }
+
+    // @Bean
+    // public WebSecurityCustomizer webSecurityCustomizer() {
+    // return (web) -> web.ignoring().requestMatchers("/api/users");
+    // }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
