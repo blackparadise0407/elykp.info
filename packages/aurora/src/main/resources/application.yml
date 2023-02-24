@@ -37,5 +37,5 @@ web:
   scope: ${SCOPE:SCOPE_elykp-resources-api}
   authority: ${OAUTH_AUTHORITY:http://localhost:8080/realms/elykp}
   client-id: ${OAUTH_CLIENT_ID:elykp-api}
-  client-secret: ${OAUTH_CLIENT_SECRET:nr7q8okHWR2hMT3Alyu7XfZx0kGaknQB}
+  client-secret: ${OAUTH_CLIENT_SECRET:DxAuJhbxagzNaslSFwX37QqS7zUg9P2e}
   authority-api-url: ${OAUTH_AUTHORITY_API_URL:http://localhost:8080/admin/realms/elykp}

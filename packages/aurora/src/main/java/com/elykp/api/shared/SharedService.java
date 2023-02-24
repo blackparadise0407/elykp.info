@@ -1,8 +1,10 @@
 package com.elykp.api.shared;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,8 +15,8 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 
 @Service
 public class SharedService {
@@ -36,7 +38,7 @@ public class SharedService {
         this.restTemplate = restTemplate;
     }
 
-    public Optional<String> requestAccessTokenFromIS() throws Unauthorized {
+    public Optional<String> requestAccessTokenFromIS() throws HttpClientErrorException.Unauthorized {
         String url = authority + "/protocol/openid-connect/token";
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -57,16 +59,26 @@ public class SharedService {
     }
 
     @Nullable
-    public KeycloakUserResponse getKcUserById(String accessToken, String userId) throws Unauthorized {
+    @Cacheable(value = "user", key = "#userId")
+    public KeycloakUserResponse getKcUserById(String userId) throws HttpClientErrorException.NotFound {
+        Optional<String> accessToken = requestAccessTokenFromIS();
+        if (accessToken.isEmpty()) {
+            throw new InternalError();
+        }
+
         String url = authorityApiUrl + "/users/" + userId;
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setBearerAuth(accessToken);
+        httpHeaders.setBearerAuth(accessToken.get());
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(null, httpHeaders);
         ResponseEntity<KeycloakUserResponse> response = restTemplate.exchange(url, HttpMethod.GET, body,
                 KeycloakUserResponse.class);
 
-        if (response.getStatusCode() == HttpStatus.OK) {
+        if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
+            throw new NoSuchElementException();
+        }
+
+        if(response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
         }
 

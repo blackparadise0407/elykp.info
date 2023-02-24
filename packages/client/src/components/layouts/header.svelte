@@ -53,7 +53,7 @@
 				</div>
 			{/if}
 		{:else}
-			<button on:click={signIn}>Login</button>
+			<Button on:click={signIn}>{$t('login')}</Button>
 		{/if}
 	</div>
 </nav>
