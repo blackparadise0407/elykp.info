@@ -17,7 +17,7 @@ import com.elykp.api.dto.tags.CreateTag;
 import com.elykp.api.repositories.TagRepository;
 
 @RestController
-@RequestMapping(value = "/tags")
+@RequestMapping(value = "/api/tags")
 public class TagsController {
     private final TagRepository tagRepository;
 

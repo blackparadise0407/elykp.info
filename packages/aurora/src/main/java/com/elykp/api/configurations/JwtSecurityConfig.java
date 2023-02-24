@@ -24,20 +24,13 @@ public class JwtSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors().and()
-                .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/users").permitAll()
-                        .requestMatchers("/api/**").hasAuthority(scope)
-                        .anyRequest().authenticated())
+                        .requestMatchers("/api/users/**").permitAll()
+                        .anyRequest().hasAuthority(scope))
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
         return http.build();
     }
-
-    // @Bean
-    // public WebSecurityCustomizer webSecurityCustomizer() {
-    // return (web) -> web.ignoring().requestMatchers("/api/users");
-    // }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

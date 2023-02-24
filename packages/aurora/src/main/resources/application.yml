@@ -1,6 +1,4 @@
 server:
-  servlet:
-    context-path: /api
   port: 8081
 
 spring:
@@ -15,7 +13,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${OAUTH_ISSUER_URI:http://localhost:8080/realms/elykp}
+          issuer-uri: ${OAUTH_AUTHORITY:http://localhost:8080/realms/elykp}
           jwk-set-uri: ${OAUTH_JWKS_URI:http://localhost:8080/realms/elykp/protocol/openid-connect/certs}
   datasource:
     url: ${ELYKP_CONNECTION_URL:jdbc:postgresql://localhost:5432/elykp_dev}
@@ -37,3 +35,7 @@ web:
   cors:
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
   scope: ${SCOPE:SCOPE_elykp-resources-api}
+  authority: ${OAUTH_AUTHORITY:http://localhost:8080/realms/elykp}
+  client-id: ${OAUTH_CLIENT_ID:elykp-api}
+  client-secret: ${OAUTH_CLIENT_SECRET:nr7q8okHWR2hMT3Alyu7XfZx0kGaknQB}
+  authority-api-url: ${OAUTH_AUTHORITY_API_URL:http://localhost:8080/admin/realms/elykp}
