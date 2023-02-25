@@ -65,25 +65,6 @@ const getUser = () => {
 	return manager.getUser();
 };
 
-// const startAuthentication = async () => {
-// 	if (window.location.hash && window.location.hash.indexOf('id_token') >= 0) {
-// 		try {
-// 			const user = await mgr.signinRedirectCallback();
-// 			setUser(user);
-// 		} catch (e) {
-// 			window.location.href = '/';
-// 		}
-// 	} else {
-// 		const user = await mgr.getUser();
-// 		if (!user || user.expired) {
-// 			mgr.signinRedirect();
-// 		} else {
-// 			setUser(user);
-// 			window.location.href = '/';
-// 		}
-// 	}
-// };
-
 export const signIn = () => manager.signinRedirect();
 
 export const logout = () => manager.signoutRedirect();

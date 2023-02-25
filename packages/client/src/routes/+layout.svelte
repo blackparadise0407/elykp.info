@@ -21,7 +21,7 @@
 {:else}
 	<Header />
 	<main class="min-h-[calc(100vh-68px)] bg-slate-50 dark:bg-neutral-900">
-		<div class="container">
+		<div class="app-container">
 			<slot />
 		</div>
 	</main>

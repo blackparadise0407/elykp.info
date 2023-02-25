@@ -25,21 +25,25 @@ public class TagsController {
         this.tagRepository = tagRepository;
     }
 
-    @PostMapping("")
+    @PostMapping()
     public ResponseEntity<Tag> create(@RequestBody CreateTag createTag) throws DataIntegrityViolationException {
         try {
             Tag tag = new Tag();
             tag.setName(createTag.getName());
             tagRepository.save(tag);
             return ResponseEntity.ok(tag);
-
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tag already exists");
         }
     }
 
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<List<Tag>> search(@RequestParam String q) {
         return ResponseEntity.ok(tagRepository.findByNameIgnoreCaseContains(q));
+    }
+
+    @GetMapping("/trendings")
+    public ResponseEntity<List<Tag>> getTrendingTags() {
+        return ResponseEntity.ok(tagRepository.findAll());
     }
 }

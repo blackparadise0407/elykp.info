@@ -11,7 +11,7 @@
 <nav
 	class="h-[68px] bg:white dark:bg-neutral-900 shadow border-b border-b-transparent dark:border-b-neutral-800"
 >
-	<div class="h-full container flex items-center">
+	<div class="h-full app-container flex items-center">
 		<a href="/"><img class="w-24 lg:w-32" src="/logo.png" alt="Elykp logo" /></a>
 		<div class="flex-grow" />
 
@@ -53,7 +53,10 @@
 				</div>
 			{/if}
 		{:else}
-			<Button on:click={signIn}>{$t('login')}</Button>
+			<div class="flex gap-2">
+				<Button variant="text">{$t('sign_up')}</Button>
+				<Button variant="primary" on:click={signIn}>{$t('log_in')}</Button>
+			</div>
 		{/if}
 	</div>
 </nav>

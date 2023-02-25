@@ -1,6 +1,5 @@
 package com.elykp.api.shared;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -59,11 +58,11 @@ public class SharedService {
     }
 
     @Nullable
-    @Cacheable(value = "user", key = "#userId")
-    public KeycloakUserResponse getKcUserById(String userId) throws HttpClientErrorException.NotFound {
+    @Cacheable(value = "user", key = "#userId", unless = "#result == null")
+    public KeycloakUserResponse getKcUserById(String userId) {
         Optional<String> accessToken = requestAccessTokenFromIS();
         if (accessToken.isEmpty()) {
-            throw new InternalError();
+            return null;
         }
 
         String url = authorityApiUrl + "/users/" + userId;
@@ -74,11 +73,7 @@ public class SharedService {
         ResponseEntity<KeycloakUserResponse> response = restTemplate.exchange(url, HttpMethod.GET, body,
                 KeycloakUserResponse.class);
 
-        if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-            throw new NoSuchElementException();
-        }
-
-        if(response.getStatusCode() == HttpStatus.OK) {
+        if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody();
         }
 

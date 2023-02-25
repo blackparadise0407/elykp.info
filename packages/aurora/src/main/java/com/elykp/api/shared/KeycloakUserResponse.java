@@ -1,5 +1,8 @@
 package com.elykp.api.shared;
 
+import java.util.List;
+import java.util.Map;
+
 import lombok.Getter;
 
 @Getter
@@ -13,4 +16,5 @@ public class KeycloakUserResponse {
     private String firstName;
     private String lastName;
     private String email;
+    private Map<String, List<String>> attributes;
 }

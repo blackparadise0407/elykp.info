@@ -3,8 +3,8 @@
 </script>
 
 <div class="flex justify-between">
-	<div class="py-6 mx-4">Sidebar</div>
-	<div class="w-full max-w-5xl py-6 mx-4">
+	<div class="w-16 md:w-80 py-6 mr-4 shrink-0">Sidebar</div>
+	<div class="flex-1 max-w-2xl py-6">
 		<PhotoCard />
 	</div>
 </div>

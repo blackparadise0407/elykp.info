@@ -19,3 +19,7 @@ i[class^='bi-']::before,
 i[class*=' bi-']::before {
 	line-height: 1.1 !important;
 }
+
+.app-container {
+	@apply w-full max-w-5xl mx-auto;
+}

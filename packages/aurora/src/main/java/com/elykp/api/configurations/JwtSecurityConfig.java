@@ -26,9 +26,11 @@ public class JwtSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors().and()
+                .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/users/**", "/error").permitAll()
-                        .anyRequest().hasAuthority(scope))
+                        .requestMatchers("/api/users/**", "/api/tags/**", "/error").permitAll()
+                        .requestMatchers("/api/**").hasAuthority(scope)
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
 
         return http.build();
