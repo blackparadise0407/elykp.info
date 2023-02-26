@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<img
-		class="w-full rounded-lg"
+		class="w-full rounded-sm"
 		src="https://images.unsplash.com/photo-1676729880091-4c6a7e36e9f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
 		alt=""
 	/>

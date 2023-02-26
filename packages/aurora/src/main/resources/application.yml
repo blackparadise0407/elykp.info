@@ -33,7 +33,7 @@ spring:
 
 web:
   cors:
-    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
   scope: ${SCOPE:SCOPE_elykp-resources-api}
   authority: ${OAUTH_AUTHORITY:http://localhost:8080/realms/elykp}
   client-id: ${OAUTH_CLIENT_ID:elykp-api}

@@ -23,3 +23,7 @@ i[class*=' bi-']::before {
 .app-container {
 	@apply w-full max-w-5xl mx-auto;
 }
+
+hr {
+	@apply dark:border-neutral-500;
+}

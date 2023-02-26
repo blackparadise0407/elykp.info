@@ -10,6 +10,16 @@ type TransVar = Record<string, any>;
 
 const locale = writable<SupportedLocale>('en');
 
+const mapToLocale = (k: SupportedLocale) => {
+	switch (k) {
+		case 'en':
+		case 'vi':
+			return k;
+		default:
+			return 'en';
+	}
+};
+
 function translate(locale: SupportedLocale, key: string, vars: TransVar): string {
 	let text = translations[locale][key];
 	if (!text) return key;
@@ -36,6 +46,6 @@ export const setLanguage = (lang: SupportedLocale) => {
 
 export const initI18N = () => {
 	if ('localStorage' in window) {
-		setLanguage((window.localStorage.getItem(LOCALE_STORAGE_KEY) || 'en') as SupportedLocale);
+		setLanguage(mapToLocale(window.localStorage.getItem(LOCALE_STORAGE_KEY)));
 	}
 };
