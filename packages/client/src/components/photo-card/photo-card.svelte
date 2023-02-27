@@ -5,6 +5,7 @@
 	import { writable } from '~/lib/store';
 
 	import Avatar from '../avatar/avatar.svelte';
+	import Skeleton from '../skeleton/skeleton.svelte';
 
 	const userLoading$ = writable(true);
 
@@ -16,11 +17,22 @@
 </script>
 
 <div class="max-w-xl space-y-3">
+	<Skeleton
+		paragraph={{
+			rows: 3,
+			width: [100, 200, 300],
+		}}
+	/>
 	<div class="flex items-center gap-3">
 		<Avatar cls="shrink-0" src={$user$?.picture} />
 		<div class="flex-1 min-w-0">
-			{#if $userLoading$}
-				<p>Loading...</p>
+			{#if !$userLoading$}
+				<Skeleton
+					paragraph={{
+						rows: 3,
+						width: 100,
+					}}
+				/>
 			{:else}
 				<p class="truncate">
 					{$user$?.username ?? ''}

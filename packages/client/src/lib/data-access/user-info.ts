@@ -21,7 +21,7 @@ const getEmptyUser = (userId: string) =>
 		firstName: '',
 		lastName: '',
 		id: userId,
-		username: '',
+		username: 'unknown',
 	} as IKeycloakUser);
 
 const getUser = (userId: string) => {
