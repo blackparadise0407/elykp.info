@@ -28,6 +28,7 @@ public class Tag {
     @Column(length = 100)
     private String name;
 
+    @Column(name = "created_at")
     private Long createdAt;
 
     @PrePersist
