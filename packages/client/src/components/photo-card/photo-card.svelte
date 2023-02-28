@@ -17,22 +17,11 @@
 </script>
 
 <div class="max-w-xl space-y-3">
-	<Skeleton
-		paragraph={{
-			rows: 3,
-			width: [100, 200, 300],
-		}}
-	/>
 	<div class="flex items-center gap-3">
 		<Avatar cls="shrink-0" src={$user$?.picture} />
 		<div class="flex-1 min-w-0">
-			{#if !$userLoading$}
-				<Skeleton
-					paragraph={{
-						rows: 3,
-						width: 100,
-					}}
-				/>
+			{#if $userLoading$}
+				<Skeleton paragraph />
 			{:else}
 				<p class="truncate">
 					{$user$?.username ?? ''}
