@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: core-service
   data:
     redis:
       database: 0
@@ -31,11 +33,17 @@ spring:
         jdbc:
           '[time_zone]': UTC
 
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+
+
 web:
   cors:
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
   scope: ${SCOPE:SCOPE_elykp-resources-api}
   authority: ${OAUTH_AUTHORITY:http://localhost:8080/realms/elykp}
   client-id: ${OAUTH_CLIENT_ID:elykp-api}
-  client-secret: ${OAUTH_CLIENT_SECRET:nr7q8okHWR2hMT3Alyu7XfZx0kGaknQB}
+  client-secret: ${OAUTH_CLIENT_SECRET:DxAuJhbxagzNaslSFwX37QqS7zUg9P2e}
   authority-api-url: ${OAUTH_AUTHORITY_API_URL:http://localhost:8080/admin/realms/elykp}

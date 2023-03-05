@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+  discovery:
+    build:
+      context: ./packages/discovery-server
+    ports:
+      - "8761:8761"
